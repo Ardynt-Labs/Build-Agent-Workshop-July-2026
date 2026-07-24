@@ -15,7 +15,7 @@ Use Claude Code's plan mode so you review the approach before anything is writte
 #### Prompt 7a (plan mode)
 
 {% code overflow="wrap" %}
-```text
+```
 Read the story GW-006 from the rm_story table on my instance. Then, in plan mode, propose how you would implement it in this app. List the artifacts you would create or change and map each one to an acceptance criterion. Suggest any improvements you think are worthwhile. Ask me questions as needed to clarify requirements, but also provide me your recommended answers. Do not write code yet.
 ```
 {% endcode %}
@@ -24,25 +24,25 @@ Read the story GW-006 from the rm_story table on my instance. Then, in plan mode
 **Expect a lot of approvals.** To read the story, Claude runs a series of now-sdk query commands and asks you to approve each one ("Do you want to proceed?"). That is normal. Choose "Yes, and don't ask again" to stop the repeated prompts and let it work.
 {% endhint %}
 
-<figure><img src="assets/lab7-approval-prompt.png" alt="Claude Code's command-approval prompt — choose &quot;Yes, and don't ask again&quot; to stop repeated prompts"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/lab7-approval-prompt.png" alt="Claude Code&#x27;s command-approval prompt — choose &#x22;Yes, and don&#x27;t ask again&#x22; to stop repeated prompts"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="warning" %}
 **Can't reach the instance? Check bash.** If Claude says it lacks tools or cannot read your instance, you probably skipped the bash step in Lab 6. Exit Claude, type bash, and start claude again — that loads the now-sdk tools it needs. You don't need to reconnect to the instance, you can proceed with the lab. As a fallback you can paste the full story text, or drag the stories image into the terminal.
 {% endhint %}
 
 {% hint style="info" %}
-**Optional, for the curious.** The now-sdk gives Claude tools to query your instance directly, which is how it reads rm_story. More broadly, connecting an AI agent to a live system uses the Model Context Protocol (MCP): a small, secure connector that exposes a system like ServiceNow to the agent so it can read records and act. Many organizations are now building their own ServiceNow MCP servers for exactly this.
+**Optional, for the curious.** The now-sdk gives Claude tools to query your instance directly, which is how it reads rm\_story. More broadly, connecting an AI agent to a live system uses the Model Context Protocol (MCP): a small, secure connector that exposes a system like ServiceNow to the agent so it can read records and act. Many organizations are now building their own ServiceNow MCP servers for exactly this.
 {% endhint %}
 
-<figure><img src="assets/lab7-plan-mode-questions.png" alt="Claude Code's plan-mode output for the story, asking clarifying questions with recommended answers"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/lab7-plan-mode-questions.png" alt="Claude Code&#x27;s plan-mode output for the story, asking clarifying questions with recommended answers"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
-<figure><img src="assets/lab7-plan-mode-review-answers.png" alt="Claude Code reviewing the chosen answers before submitting, in plan mode"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/lab7-plan-mode-review-answers.png" alt="Claude Code reviewing the chosen answers before submitting, in plan mode"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Step 2 · Approve the plan, then build and deploy
 
 When the plan looks right, approve it. Claude then makes all the edits without stopping to ask on each one. Claude might still ask you for additional permissions to run commands as it starts implementing.
 
-<figure><img src="assets/lab7-approve-plan-go-for-it.png" alt="Confirming the plan is ready — &quot;No, go for it.&quot; — before Claude Code begins implementation"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/lab7-approve-plan-go-for-it.png" alt="Confirming the plan is ready — &#x22;No, go for it.&#x22; — before Claude Code begins implementation"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 As it works, Claude shows a plain summary of what it changed: which fields, rules, and files. Read it like a change summary — it lets you catch anything wrong before it goes live. If something looks off, tell Claude to fix it before you deploy.
 
@@ -50,7 +50,7 @@ As it works, Claude shows a plain summary of what it changed: which fields, rule
 **IMPORTANT — Deploy it.** When the changes look right, deploy from inside Claude with `!npm run deploy`. Nothing is on your instance until you do this.
 {% endhint %}
 
-<figure><img src="assets/lab7-build-passing-artifacts-table.png" alt="Claude Code's summary after building: implemented, build passing, with an artifact-to-acceptance-criteria mapping table"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/lab7-build-passing-artifacts-table.png" alt="Claude Code&#x27;s summary after building: implemented, build passing, with an artifact-to-acceptance-criteria mapping table"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Verify
 

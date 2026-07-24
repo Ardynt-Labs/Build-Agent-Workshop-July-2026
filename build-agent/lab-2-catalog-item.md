@@ -9,22 +9,22 @@ This is the requirement as it usually arrives in your inbox: underspecified, and
 #### Prompt 2a
 
 {% code overflow="wrap" %}
-```text
+```
 Create a catalog item so employees can request work. Give it a sensible name and let people submit a basic request.
 ```
 {% endcode %}
 
-<figure><img src="assets/catalog-round1-plan.png" alt="Build Agent's plan for the vague Round 1 catalog item request: Create Groundwork Request Record Producer"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/catalog-round1-plan.png" alt="Build Agent&#x27;s plan for the vague Round 1 catalog item request: Create Groundwork Request Record Producer"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 Approve it. Look at what you get. It will be generic, and that is the point: vague in, vague out. Note what is missing (which fields? where do submissions go? any approval? how would anyone even find it?) before moving on.
 
-<figure><img src="assets/catalog-round1-generic-form.png" alt="The generic &quot;Submit Groundwork Request&quot; form produced by the vague Round 1 prompt"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/catalog-round1-generic-form.png" alt="The generic &#x22;Submit Groundwork Request&#x22; form produced by the vague Round 1 prompt"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="info" %}
 **TIP — If you can't find the Catalog Item**, simply ask Build Agent to tell you how to access it in the Service Portal.
 {% endhint %}
 
-<figure><img src="assets/catalog-find-in-portal.png" alt="Build Agent's answer showing how to access the Submit Groundwork Request item in the Service Portal, with direct link and other access paths"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/catalog-find-in-portal.png" alt="Build Agent&#x27;s answer showing how to access the Submit Groundwork Request item in the Service Portal, with direct link and other access paths"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Round 2: the real requirements
 
@@ -33,7 +33,7 @@ Now the BA has done their job and you have more extensive requirements. Send the
 #### Prompt 2b
 
 {% code overflow="wrap" %}
-```text
+```
 Create a new catalog item using these requirements:
 Name: Submit a Groundwork Request Extended.
 Variables: Requested for (reference to user, mandatory), Location (reference to Location, mandatory), Category (choice matching the Request table categories, mandatory), Cost estimate (decimal), Description (multi-line, mandatory).
@@ -62,13 +62,13 @@ These are the same principles that apply to creating good acceptance criteria: s
 
 This build runs a little longer than the others because it also wires up the fulfillment flow and generates a test. The plugin still installing in tab one covers the wait; carry on reading while it works.
 
-<figure><img src="assets/catalog-round2-plan.png" alt="Build Agent's plan for the Round 2 catalog item: catalog item + variables, fulfillment flow with approval branching, ATF test, build and install"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/catalog-round2-plan.png" alt="Build Agent&#x27;s plan for the Round 2 catalog item: catalog item + variables, fulfillment flow with approval branching, ATF test, build and install"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Verify
 
 Open **Employee Center** and search for Submit a Groundwork Request Extended. Submit one, then open your Request list and confirm the record landed with your values, including a Parent link back to the submission. Compare round 1 and round 2.
 
-<figure><img src="assets/catalog-round2-submit-form.png" alt="The &quot;Submit a Groundwork Request Extended&quot; catalog item form with the full Round 2 variables"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/catalog-round2-submit-form.png" alt="The &#x22;Submit a Groundwork Request Extended&#x22; catalog item form with the full Round 2 variables"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Optional · Run the ATF test
 
@@ -78,7 +78,7 @@ Navigate to **All > Automated Test Framework > Administration > Properties**
 
 Check the **Enable test/test suite execution** property.
 
-<figure><img src="assets/atf-enable-test-execution-property.png" alt="Automated Test Framework property: Enable test/test suite execution, checked"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/atf-enable-test-execution-property.png" alt="Automated Test Framework property: Enable test/test suite execution, checked"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Round 3: finish the manual steps, only if needed
 

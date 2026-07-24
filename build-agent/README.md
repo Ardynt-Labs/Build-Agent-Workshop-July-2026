@@ -6,19 +6,19 @@ This morning you will do a couple of activities like what you or your team do at
 
 By noon you will have a working application called Groundwork that you scaffolded, exposed through **Employee Center** or Service Portal, extended from real user stories, and documented, all through conversation with Build Agent.
 
-In the afternoon ([Build Anywhere](../build-anywhere/README.md)) you do it again from the outside: connect to that same app from a GitHub Codespace, implement another story, and add an AI skill, driving Claude Code and the ServiceNow SDK from the command line. Same platform, same governance, a different cockpit.
+In the afternoon ([Build Anywhere](../build-anywhere/)) you do it again from the outside: connect to that same app from a GitHub Codespace, implement another story, and add an AI skill, driving Claude Code and the ServiceNow SDK from the command line. Same platform, same governance, a different cockpit.
 
 ## What we will accomplish this morning
 
 By the time you leave you will have done a full slice of platform work with an agent as your pair.
 
-| Lab | What you build | The skill underneath |
-|---|---|---|
-| 1 · Foundational app | A working app: table, fields, sample data, navigation | Turning one prompt into a running app |
+| Lab                    | What you build                                                          | The skill underneath                                                                        |
+| ---------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| 1 · Foundational app   | A working app: table, fields, sample data, navigation                   | Turning one prompt into a running app                                                       |
 | 2 · Catalog front door | An Employee Center or Service Portal catalog item that creates requests | The quality of the provided requirements directly impacts the quality of the generated code |
-| 3 · Load backlog | Eight user stories loaded into the platform backlog | Getting real-world input into the platform |
-| 4 · Implement a story | One backlog story taken to done against its acceptance criteria | Reviewing an agent's plan and holding the line |
-| 5 · Document | A README and architecture diagram generated from the app | Documentation as the zero-risk agent task |
+| 3 · Load backlog       | Eight user stories loaded into the platform backlog                     | Getting real-world input into the platform                                                  |
+| 4 · Implement a story  | One backlog story taken to done against its acceptance criteria         | Reviewing an agent's plan and holding the line                                              |
+| 5 · Document           | A README and architecture diagram generated from the app                | Documentation as the zero-risk agent task                                                   |
 
 You will finish with an app that is foundational, fronted by a catalog item, extended by a story you implemented, and documented, plus a feel for where the human stays in the loop.
 
@@ -49,7 +49,7 @@ Start a fresh chat when:
 * **You reloaded the window and your attachment disappeared.** Uploads live only in the current conversation and do not survive a reload.
 * **You get a "terminated" error.** We are using lab instances, with fewer allocated resources than any of your customer instances, and more similar to a Personal Developer Instance. If this error appears, simply prompt **Build Agent** to "try again" and it should pick up from where it left off. If you get this error repeatedly, start another chat and point it at your existing application.
 
-<figure><img src="assets/terminated-error-try-again.png" alt="Build Agent chat showing a &quot;terminated&quot; error, with &quot;try again&quot; typed in reply and the agent resuming work"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/terminated-error-try-again.png" alt="Build Agent chat showing a &#x22;terminated&#x22; error, with &#x22;try again&#x22; typed in reply and the agent resuming work"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="info" %}
 **Tip: attach and prompt together.** Whenever a task needs a file, attach it and send your instruction in the same message. If you attach, then reload, then prompt, the agent will not see the file. Confirm the attachment chip appears before you send.
@@ -60,11 +60,11 @@ Start a fresh chat when:
 * Reserve your instance using the link and code on screen. Log in with the credentials provided through the instance reservation page. Keep this page open, we will need it later.
 * Navigate to **All > App Engine > ServiceNow Studio**. You might have to wait for 20-30 seconds for the **All** menu to load when the instance has just been claimed.
 
-<figure><img src="assets/all-menu-search-studio.png" alt="All menu search showing &quot;ServiceNow Studio&quot; under App Engine"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/all-menu-search-studio.png" alt="All menu search showing &#x22;ServiceNow Studio&#x22; under App Engine"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 * The Build Agent chat panel opens by default in new Studio sessions. If it is not open, select Open Build Agent from the status bar in the lower right corner, or the sparkle icon in the banner (upper right).
 
-<figure><img src="assets/studio-with-build-agent-panel.png" alt="ServiceNow Studio with the Build Agent (Now Assist) panel open on the right"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
+<figure><img src="../.gitbook/assets/studio-with-build-agent-panel.png" alt="ServiceNow Studio with the Build Agent (Now Assist) panel open on the right"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="warning" %}
 **IMPORTANT — Raise** your hand at any point. Floor support is here for exactly this.
