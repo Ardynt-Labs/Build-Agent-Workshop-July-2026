@@ -55,6 +55,12 @@ The user will hand over an updated `.docx` lab guide periodically. Each time:
    attribute breaks the tag. Don't try to preserve the docx's inch sizing;
    this pattern renders full-width and responsive.
 
+   **Never nest a `<figure>` inside a `{% hint %}` block.** GitBook's hint
+   renderer doesn't handle it — the image comes out tiny and the caption
+   doesn't show at all. If a hint's source text has a screenshot in the
+   middle of it, split it: hint text only inside `{% hint %}...{% endhint %}`,
+   then the `<figure>` right after the hint closes, as regular content.
+
    For a file attendees need to download and use elsewhere (e.g. Lab 3's
    stories spreadsheet): embed it with the figure pattern, then add a
    `{% hint style="info" %}` telling them to **right-click the image and

@@ -6,15 +6,13 @@ Your Groundwork app is sitting on your instance. Moving to the command line chan
 **IMPORTANT — You will need four data items to finish this configuration.**
 
 * Your instance URL, username, and password are all on your instance reservation page — the same page you used this morning. The password is hidden; click the lock icon to reveal it.
+* The one thing not on that page is your Groundwork app's sys_id: get it from your app in Studio (or the sys_app record), or simply ask Build Agent in your instance, "What is the sys_id of my application?"
+* We recommend that you capture these 4 items in your note-taking software of choice, e.g Notepad, OneNote.
+{% endhint %}
 
 <figure><img src="assets/lab6-instance-reservation-page.png" alt="Instance reservation page showing the instance URL and login details, with the password hidden behind a lock icon"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
-* The one thing not on that page is your Groundwork app's sys_id: get it from your app in Studio (or the sys_app record), or simply ask Build Agent in your instance, "What is the sys_id of my application?"
-
 <figure><img src="assets/lab6-ask-sys-id.png" alt="Build Agent answering &quot;what is the sys id of the app?&quot; with the application's sys_id"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
-
-* We recommend that you capture these 4 items in your note-taking software of choice, e.g Notepad, OneNote.
-{% endhint %}
 
 ### Step 1 · Start your Codespace
 

@@ -22,9 +22,9 @@ Read the story GW-006 from the rm_story table on my instance. Then, in plan mode
 
 {% hint style="info" %}
 **Expect a lot of approvals.** To read the story, Claude runs a series of now-sdk query commands and asks you to approve each one ("Do you want to proceed?"). That is normal. Choose "Yes, and don't ask again" to stop the repeated prompts and let it work.
+{% endhint %}
 
 <figure><img src="assets/lab7-approval-prompt.png" alt="Claude Code's command-approval prompt — choose &quot;Yes, and don't ask again&quot; to stop repeated prompts"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
-{% endhint %}
 
 {% hint style="warning" %}
 **Can't reach the instance? Check bash.** If Claude says it lacks tools or cannot read your instance, you probably skipped the bash step in Lab 6. Exit Claude, type bash, and start claude again — that loads the now-sdk tools it needs. You don't need to reconnect to the instance, you can proceed with the lab. As a fallback you can paste the full story text, or drag the stories image into the terminal.
