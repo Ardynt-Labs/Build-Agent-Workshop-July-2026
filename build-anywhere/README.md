@@ -1,10 +1,10 @@
-# Part Two · Build Anywhere
+# Part Two - Build Anywhere
 
 This morning you drove **Build Agent** from inside the platform. This afternoon you drive an AI coding agent from outside it. Claude Code writes ServiceNow Fluent (the platform's TypeScript authoring language), the ServiceNow SDK compiles that into real platform artifacts, and it deploys into the same scoped Groundwork app you already built. Same instance, same scope, same update sets, a different cockpit.
 
 Here is the loop for the afternoon:
 
-![Diagram: You describe the change, Claude Code + the ServiceNow SDK write Fluent, !npm run deploy builds and deploys, landing in your same scoped instance](assets/afternoon-loop-diagram.png)
+<figure><img src="assets/afternoon-loop-diagram.png" alt="Diagram: You describe the change, Claude Code + the ServiceNow SDK write Fluent, !npm run deploy builds and deploys, landing in your same scoped instance"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 The platform, scope, and update sets are identical to the morning. Only the tool you hold has changed.
 

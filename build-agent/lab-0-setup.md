@@ -6,13 +6,13 @@ For **Build Agent** to be able to read and action your backlog stories, they nee
 
 Install **Agile Development v2** (App ID `sn_store_agile_mob`) from the Store. Search "agile development v2" under **All > System Definition > Plugins** applications. Your backlog lab (Lab 3) depends on it, so start it now.
 
-![All menu search showing the Plugins module under System Definition](assets/all-menu-search-plugins.png)
+<figure><img src="assets/all-menu-search-plugins.png" alt="All menu search showing the Plugins module under System Definition"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="warning" %}
 **IMPORTANT — Can't find it in the Store?** The Store search sometimes buries Agile Development v2 past the first ten tiles, even though it is the closest name match. Click **View more** and it appears, or search the App ID `sn_store_agile_mob` directly. Flag a lab guru if it still hides.
 {% endhint %}
 
-![Application Manager search results showing the Agile Development v2 plugin with App id sn_store_agile_mob](assets/agile-development-v2-store-listing.png)
+<figure><img src="assets/agile-development-v2-store-listing.png" alt="Application Manager search results showing the Agile Development v2 plugin with App id sn_store_agile_mob"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="info" %}
 **TIP — While it installs.** Do not sit and wait. Leave this tab on the install screen and open a second browser tab on the same instance. Labs 1 and 2 (Scaffold and Catalog) need nothing from the plugin, so you will do both in the second tab while the install finishes here.

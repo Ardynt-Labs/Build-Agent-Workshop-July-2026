@@ -1,4 +1,4 @@
-# Build Agent on ServiceNow
+# Part One - Build Agent on ServiceNow
 
 ### Ship Your Backlog with Enterprise Vibe Coding
 
@@ -49,7 +49,7 @@ Start a fresh chat when:
 * **You reloaded the window and your attachment disappeared.** Uploads live only in the current conversation and do not survive a reload.
 * **You get a "terminated" error.** We are using lab instances, with fewer allocated resources than any of your customer instances, and more similar to a Personal Developer Instance. If this error appears, simply prompt **Build Agent** to "try again" and it should pick up from where it left off. If you get this error repeatedly, start another chat and point it at your existing application.
 
-![Build Agent chat showing a "terminated" error, with "try again" typed in reply and the agent resuming work](assets/terminated-error-try-again.png)
+<figure><img src="assets/terminated-error-try-again.png" alt="Build Agent chat showing a &quot;terminated&quot; error, with &quot;try again&quot; typed in reply and the agent resuming work"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="info" %}
 **Tip: attach and prompt together.** Whenever a task needs a file, attach it and send your instruction in the same message. If you attach, then reload, then prompt, the agent will not see the file. Confirm the attachment chip appears before you send.
@@ -60,11 +60,11 @@ Start a fresh chat when:
 * Reserve your instance using the link and code on screen. Log in with the credentials provided through the instance reservation page. Keep this page open, we will need it later.
 * Navigate to **All > App Engine > ServiceNow Studio**. You might have to wait for 20-30 seconds for the **All** menu to load when the instance has just been claimed.
 
-![All menu search showing "ServiceNow Studio" under App Engine](assets/all-menu-search-studio.png)
+<figure><img src="assets/all-menu-search-studio.png" alt="All menu search showing &quot;ServiceNow Studio&quot; under App Engine"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 * The Build Agent chat panel opens by default in new Studio sessions. If it is not open, select Open Build Agent from the status bar in the lower right corner, or the sparkle icon in the banner (upper right).
 
-![ServiceNow Studio with the Build Agent (Now Assist) panel open on the right](assets/studio-with-build-agent-panel.png)
+<figure><img src="assets/studio-with-build-agent-panel.png" alt="ServiceNow Studio with the Build Agent (Now Assist) panel open on the right"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="warning" %}
 **IMPORTANT — Raise** your hand at any point. Floor support is here for exactly this.

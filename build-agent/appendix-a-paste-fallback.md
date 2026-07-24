@@ -4,6 +4,7 @@ If the image will not ingest, copy the entire block below and paste it into Buil
 
 Answer "Work in the global scope" if the agent asks. This block is generated from the same story data as the spreadsheet, so the numbers match.
 
+{% code overflow="wrap" %}
 ```text
 The text below is my product backlog. Create one record in the Story [rm_story] table for each STORY block. Map number to the start of the Short description, then the short label, then Description, Acceptance criteria, and Story points to the matching fields. Work in the global scope. Do not create any tables or application metadata, only the story records.
 
@@ -23,3 +24,4 @@ STORY GW-007 | Short description: Requester status notifications | Description: 
 
 STORY GW-008 | Short description: Bulk onboarding request template | Description: As a team lead, I want to generate the standard set of onboarding requests for a new starter in one action so that period-start setup is consistent and fast. | Acceptance criteria: - An action or script generates a predefined set of requests (workspace access, equipment, orientation) for a named person - Generated requests are linked by a common reference so they can be tracked as a group - Each generated request follows the normal approval rules | Story points: 8
 ```
+{% endcode %}

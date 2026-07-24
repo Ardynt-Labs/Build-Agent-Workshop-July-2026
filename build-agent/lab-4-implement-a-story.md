@@ -10,25 +10,29 @@ Before you build anything, put the story under review. Real acceptance criteria 
 
 #### Prompt 4a (swap in your story number)
 
+{% code overflow="wrap" %}
 ```text
 Read the story in the rm_story table with Number GW-003. Do not build anything yet. Review its acceptance criteria: are they testable, complete, and unambiguous? Point out any gaps, edge cases, or missing conditions I should decide on before implementation, and suggest sharper wording.
 ```
+{% endcode %}
 
 Read the response. It will be thorough, often a list of eight or ten decisions. You do not need to resolve them all: pick the two or three that actually change the build, decide those, and move on. This is the requirements-quality lesson from Lab 2, now applied to a story you are about to implement yourself. You can also ask **Build Agent** to make suggestions for the best course of action.
 
-![Build Agent's review of GW-003's acceptance criteria, listing decisions needed before implementation](assets/lab4-story-review-decisions.png)
+<figure><img src="assets/lab4-story-review-decisions.png" alt="Build Agent's review of GW-003's acceptance criteria, listing decisions needed before implementation"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Step 2 · Review the plan and approve
 
-![Build Agent's recommended answers to the review questions, with the user accepting all recommendations](assets/lab4-recommendations-summary.png)
+<figure><img src="assets/lab4-recommendations-summary.png" alt="Build Agent's recommended answers to the review questions, with the user accepting all recommendations"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 Once you accept the refinements, **Build Agent** moves straight to an implementation plan and waits for your approval. There is no separate "now build it" prompt. If it starts building without showing a plan, or you want the plan tied to each criterion, ask:
 
 #### Optional
 
+{% code overflow="wrap" %}
 ```text
 Before you make any changes, show me the plan and map each step to the acceptance criterion it satisfies.
 ```
+{% endcode %}
 
 Read the plan properly. This is the skill. Does every acceptance criterion appear? Is it creating things you did not ask for? Push back before approving: "Skip the extra dashboard, just satisfy the three criteria."
 

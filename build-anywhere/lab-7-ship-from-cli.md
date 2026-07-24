@@ -14,14 +14,16 @@ Use Claude Code's plan mode so you review the approach before anything is writte
 
 #### Prompt 7a (plan mode)
 
+{% code overflow="wrap" %}
 ```text
 Read the story GW-006 from the rm_story table on my instance. Then, in plan mode, propose how you would implement it in this app. List the artifacts you would create or change and map each one to an acceptance criterion. Suggest any improvements you think are worthwhile. Ask me questions as needed to clarify requirements, but also provide me your recommended answers. Do not write code yet.
 ```
+{% endcode %}
 
 {% hint style="info" %}
 **Expect a lot of approvals.** To read the story, Claude runs a series of now-sdk query commands and asks you to approve each one ("Do you want to proceed?"). That is normal. Choose "Yes, and don't ask again" to stop the repeated prompts and let it work.
 
-![Claude Code's command-approval prompt — choose "Yes, and don't ask again" to stop repeated prompts](assets/lab7-approval-prompt.png)
+<figure><img src="assets/lab7-approval-prompt.png" alt="Claude Code's command-approval prompt — choose &quot;Yes, and don't ask again&quot; to stop repeated prompts"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 {% endhint %}
 
 {% hint style="warning" %}
@@ -32,15 +34,15 @@ Read the story GW-006 from the rm_story table on my instance. Then, in plan mode
 **Optional, for the curious.** The now-sdk gives Claude tools to query your instance directly, which is how it reads rm_story. More broadly, connecting an AI agent to a live system uses the Model Context Protocol (MCP): a small, secure connector that exposes a system like ServiceNow to the agent so it can read records and act. Many organizations are now building their own ServiceNow MCP servers for exactly this.
 {% endhint %}
 
-![Claude Code's plan-mode output for the story, asking clarifying questions with recommended answers](assets/lab7-plan-mode-questions.png)
+<figure><img src="assets/lab7-plan-mode-questions.png" alt="Claude Code's plan-mode output for the story, asking clarifying questions with recommended answers"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
-![Claude Code reviewing the chosen answers before submitting, in plan mode](assets/lab7-plan-mode-review-answers.png)
+<figure><img src="assets/lab7-plan-mode-review-answers.png" alt="Claude Code reviewing the chosen answers before submitting, in plan mode"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Step 2 · Approve the plan, then build and deploy
 
 When the plan looks right, approve it. Claude then makes all the edits without stopping to ask on each one. Claude might still ask you for additional permissions to run commands as it starts implementing.
 
-![Confirming the plan is ready — "No, go for it." — before Claude Code begins implementation](assets/lab7-approve-plan-go-for-it.png)
+<figure><img src="assets/lab7-approve-plan-go-for-it.png" alt="Confirming the plan is ready — &quot;No, go for it.&quot; — before Claude Code begins implementation"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 As it works, Claude shows a plain summary of what it changed: which fields, rules, and files. Read it like a change summary — it lets you catch anything wrong before it goes live. If something looks off, tell Claude to fix it before you deploy.
 
@@ -48,7 +50,7 @@ As it works, Claude shows a plain summary of what it changed: which fields, rule
 **IMPORTANT — Deploy it.** When the changes look right, deploy from inside Claude with `!npm run deploy`. Nothing is on your instance until you do this.
 {% endhint %}
 
-![Claude Code's summary after building: implemented, build passing, with an artifact-to-acceptance-criteria mapping table](assets/lab7-build-passing-artifacts-table.png)
+<figure><img src="assets/lab7-build-passing-artifacts-table.png" alt="Claude Code's summary after building: implemented, build passing, with an artifact-to-acceptance-criteria mapping table"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Verify
 

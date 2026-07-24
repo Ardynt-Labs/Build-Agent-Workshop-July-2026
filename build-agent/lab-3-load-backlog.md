@@ -16,17 +16,21 @@ At work, requirements do not arrive as beautiful prompts. They arrive as spreads
 * In your existing chat, attach it to the Build Agent chat using the attachment control. Confirm the attachment chip appears before you send.
 * Send the attachment together with this prompt, in the same message:
 
-![Spreadsheet of the eight Groundwork user stories (GW-001–GW-008) to attach in Lab 3](assets/groundwork-stories-sheet.png)
+<figure><img src="assets/groundwork-stories-sheet.png" alt="Spreadsheet of the eight Groundwork user stories (GW-001–GW-008) to attach in Lab 3"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
-**[⬇ Download groundwork-stories-sheet.png](assets/groundwork-stories-sheet.png)**
+{% hint style="info" %}
+**To save this image:** right-click (or press and hold on trackpad) the image above and choose **Save Image As…** (or **Download Image**), then attach the saved file to your Build Agent chat.
+{% endhint %}
 
 ### Prompt 3
 
+{% code overflow="wrap" %}
 ```text
 The attached image is a spreadsheet of user stories. Create one record in the Story [rm_story] table for each data row, mapping the columns to the matching story fields. Put the number value (GW-001 and so on) in the Number field. Do not create any tables or app metadata, only the story records. Ensure that each story has the Number field populated.
 ```
+{% endcode %}
 
-![Build Agent chat with the stories spreadsheet attached and Prompt 3 typed, ready to send](assets/lab3-attach-and-prompt.png)
+<figure><img src="assets/lab3-attach-and-prompt.png" alt="Build Agent chat with the stories spreadsheet attached and Prompt 3 typed, ready to send"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="warning" %}
 **TIP — If you encounter issues here**, flag down a guru. Issues you might encounter include:
@@ -40,14 +44,14 @@ The attached image is a spreadsheet of user stories. Create one record in the St
 Build Agent will not set the Number field on the Story for you. Build Agent will often rely on ServiceNow to automatically number records, which does not happen when using the Record API to insert records.
 {% endhint %}
 
-![Build Agent's "Update an app" quick-start option, used when starting a fresh chat to resume work on the existing Groundwork app](assets/build-agent-update-an-app-option.png)
+<figure><img src="assets/build-agent-update-an-app-option.png" alt="Build Agent's &quot;Update an app&quot; quick-start option, used when starting a fresh chat to resume work on the existing Groundwork app"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 ### Verify
 
 * Ask Build Agent: "List the stories you just created with their short descriptions." Confirm all eight (GW-001 to GW-008).
 * Spot-check one story against the printed list below. Pay attention to numbers: a $500 threshold that became $5,000 matters. You can find the list of stories in the instance by typing "rm_story.list" in the **App Navigator** (the App menu).
 
-![rm_story list view showing all eight GW-001–GW-008 story records](assets/lab3-rm-story-list.png)
+<figure><img src="assets/lab3-rm-story-list.png" alt="rm_story list view showing all eight GW-001–GW-008 story records"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
 {% hint style="warning" %}
 **IMPORTANT — If the image will not ingest.** Use the copy-paste variant in [Appendix A](appendix-a-paste-fallback.md). Same stories, same result.
