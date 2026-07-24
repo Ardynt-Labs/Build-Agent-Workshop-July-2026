@@ -1,43 +1,59 @@
 # Lab 3 · Load Your Backlog
 
-*Goal: eight user stories in the platform backlog, ready to be worked.*
+**Goal:** eight user stories in the platform backlog, ready to be worked.
 
-{% hint style="warning" %}
-**Check the plugin first.** This lab writes to the Story [rm_story] table, which the plugin from Lab 0 provides. Switch to tab one and confirm the install has completed before you start. If it is still running, give it a minute; scaffolding and the catalog should have bought enough time.
+{% hint style="info" %}
+**TIP — Where this is heading.** We load stories into the Story (`rm_story`) table today, part of Agile Development 2.0, which ServiceNow is deprecating in favour of Collaborative Work Management. Your data is safe and there is no forced migration. The direction that matters for this workshop: the platform is moving toward agents reading work items and building against them with a human in the loop, exactly the pattern you practice here. Treat `rm_story` as today's mechanism, not the long-term one.
 {% endhint %}
 
-At work, requirements do not arrive as beautiful prompts. They arrive as spreadsheets. So that is exactly what you will hand Build Agent: an image of a spreadsheet of user stories. Build Agent reads the image and creates the records for you.
+{% hint style="warning" %}
+**IMPORTANT — Check the plugin first.** This lab writes to the Story [`rm_story`] table, which the plugin from Lab 0 provides. Switch to tab one and confirm the install has completed before you start. If it is still running, give it a minute; scaffolding and the catalog should have bought enough time.
+{% endhint %}
 
-* Download the stories image from the link on screen (`groundwork-stories-sheet.png`).
-* Attach it to the Build Agent chat using the attachment control. Confirm the attachment chip appears before you send.
+At work, requirements do not arrive as beautiful prompts. They arrive as spreadsheets. So that is exactly what you will hand **Build Agent**: an image of a spreadsheet of user stories. Build Agent reads the image and creates the records for you.
+
+* Download the stories image below.
+* In your existing chat, attach it to the Build Agent chat using the attachment control. Confirm the attachment chip appears before you send.
 * Send the attachment together with this prompt, in the same message:
+
+![Spreadsheet of the eight Groundwork user stories (GW-001–GW-008) to attach in Lab 3](assets/groundwork-stories-sheet.png)
+
+**[⬇ Download groundwork-stories-sheet.png](assets/groundwork-stories-sheet.png)**
 
 ### Prompt 3
 
 ```text
-The attached image is a spreadsheet of user stories. Create one record in the Story [rm_story] table for each data row, mapping the columns to the matching story fields. Put the number value (GW-001 and so on) at the start of each short description. Do not create any tables or app metadata, only the story records.
+The attached image is a spreadsheet of user stories. Create one record in the Story [rm_story] table for each data row, mapping the columns to the matching story fields. Put the number value (GW-001 and so on) in the Number field. Do not create any tables or app metadata, only the story records. Ensure that each story has the Number field populated.
 ```
 
-> 🖼️ *Screenshot: Build Agent chat with the stories image attached, before sending*
+![Build Agent chat with the stories spreadsheet attached and Prompt 3 typed, ready to send](assets/lab3-attach-and-prompt.png)
 
 {% hint style="warning" %}
-**Expect a scope question.** Build Agent will ask which scope to work in. Answer "Work in the global scope." The stories live at the platform level, not inside your app, so global is correct here.
+**TIP — If you encounter issues here**, flag down a guru. Issues you might encounter include:
+
+* Build Agent claims it can't create the stories due to a cross-scope access issue and asks you to run a Background Script. The usual cause for this is that your chat has run out of context window and has started to hallucinate. The fix for this is to:
+  * Open a new Chat from the plus sign at the top right corner of the Build Agent chat window
+  * Click on Update an App
+  * Select your Groundwork App
+  * Resubmit the prompt
+
+Build Agent will not set the Number field on the Story for you. Build Agent will often rely on ServiceNow to automatically number records, which does not happen when using the Record API to insert records.
 {% endhint %}
 
-> 🖼️ *Screenshot: Build Agent asking the scope question, with the global-scope answer*
+![Build Agent's "Update an app" quick-start option, used when starting a fresh chat to resume work on the existing Groundwork app](assets/build-agent-update-an-app-option.png)
 
-## Verify
+### Verify
 
 * Ask Build Agent: "List the stories you just created with their short descriptions." Confirm all eight (GW-001 to GW-008).
-* Spot-check one story against the printed list below. Pay attention to numbers: a $500 threshold that became $5,000 matters.
+* Spot-check one story against the printed list below. Pay attention to numbers: a $500 threshold that became $5,000 matters. You can find the list of stories in the instance by typing "rm_story.list" in the **App Navigator** (the App menu).
 
-> 🖼️ *Screenshot: rm_story list view showing the eight GW records*
+![rm_story list view showing all eight GW-001–GW-008 story records](assets/lab3-rm-story-list.png)
 
 {% hint style="warning" %}
-**If the image will not ingest.** Start a fresh chat and try again with attach-plus-prompt in one message. If it still misbehaves, use the copy-paste variant in [Appendix A](appendix-a-paste-fallback.md). Same stories, same result.
+**IMPORTANT — If the image will not ingest.** Use the copy-paste variant in [Appendix A](appendix-a-paste-fallback.md). Same stories, same result.
 {% endhint %}
 
-## The backlog
+### The backlog
 
 | # | Story | Flavor | Pts |
 |:---:|---|---|:---:|

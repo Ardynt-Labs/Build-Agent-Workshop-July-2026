@@ -1,38 +1,77 @@
 # Build Agent Workshop — GitBook repo
 
 This repo hosts GitBook spaces via git sync. Each space is one top-level folder
-(e.g. `build-agent/`, later `build-anywhere/`), each with its own `.gitbook.yaml`
-pointing at a `README.md` + `SUMMARY.md` inside that folder. In the GitBook web
-UI, each space's **Project directory** setting is pointed at its folder — that's
-how one repo serves multiple spaces without cross-contamination.
+(`build-agent/`, `build-anywhere/`), each with its own `.gitbook.yaml` pointing
+at a `README.md` + `SUMMARY.md` inside that folder. In the GitBook web UI, each
+space's **Project directory** setting is pointed at its folder — that's how one
+repo serves multiple spaces without cross-contamination. Content that discusses
+both spaces (e.g. the closing comparison page) is duplicated as a standalone
+page in both spaces' folders rather than shared/symlinked — GitBook spaces are
+independent content trees, so there's no cross-space include mechanism.
+
+As of the v2 ("Ardynt Formatted") docx, a single source file can contain BOTH
+the morning (Build Agent) and afternoon (Build Anywhere) content in one
+document — don't assume one docx maps to one space. Read the whole thing and
+split by content, not by file.
 
 ## Workflow: converting a new docx draft
 
-The user will hand over an updated `.docx` lab guide periodically (v0.5, v0.6, ...).
-Each time:
+The user will hand over an updated `.docx` lab guide periodically. Each time:
 
-1. **Convert to raw markdown for review** — don't edit blind:
+1. **Convert to raw markdown, extracting embedded images:**
    ```bash
    ./scripts/docx-to-raw.sh /path/to/the.docx
    ```
-   This drops the pandoc output at `/tmp/docx-raw/raw.md`. Read the whole thing
-   before touching any space's files — lab numbering, order, and even which labs
-   exist can shift between drafts. (v0.5's real lab order was Scaffold → Catalog
-   Item → Load Backlog → Ship a Story → Document, which did NOT match an earlier
-   sketch that had Catalog Item last — don't assume the previous file layout is
-   still right.)
+   This drops pandoc's output at `/tmp/docx-raw/raw.md` plus an extracted
+   `media/media/imageN.png` for every embedded image, in the same position
+   they appear in the doc (as inline `<img>` tags) — so you can match each
+   image to its surrounding paragraph without guessing. Read the whole
+   markdown file before touching any space's files — lab numbering, order,
+   titles, and even which labs exist can shift between drafts, and don't
+   assume the previous file layout is still right. (v0.5→v2: Lab 1 "Scaffold
+   Groundwork" became "Creating the Foundational App"; Lab 4 "Ship a Story"
+   became "Implement a Story" — filenames were renamed to match.)
 
-2. **Map content into per-lab files** in the relevant space folder, following the
-   naming pattern already in use: `lab-N-slug.md`, `appendix-X-slug.md`. Number
-   files to match what the doc itself calls each lab. If the new draft reorders
-   labs relative to the current files, flag it to the user rather than silently
-   renumbering.
+2. **View every non-obvious embedded image** (the Read tool renders PNG/GIF
+   directly) before writing alt text or picking a filename. For screenshots
+   whose content is already fully described by the adjacent paragraph (e.g. a
+   terminal strip right after "type `bash` and press Enter"), inferring alt
+   text from context without opening the file is fine — but for anything
+   ambiguous (diagrams, multi-purpose screenshots, tiny icons), view it first.
+   Tiny decorative glyphs (e.g. a 32×32 inline mascot icon) don't embed well
+   blown up to page width — drop them and keep the sentence as plain text
+   rather than force an image in.
 
-3. **Apply the styling conventions below.** Don't invent new ones without a reason.
+3. **Copy images into a per-space `assets/` folder** with descriptive
+   filenames (`lab1-plan-approval.png`, not `image8.png`) — this is what makes
+   the repo maintainable across drafts. Reference them with plain markdown
+   image syntax `![alt text](assets/filename.png)`; GitBook renders these
+   responsively at content width, so don't try to preserve the docx's inch
+   sizing. One image is special: if a lab hands attendees a file to download
+   and attach elsewhere (e.g. Lab 3's stories spreadsheet), embed it AND add
+   an explicit `[⬇ Download filename.png](assets/filename.png)` link — GitBook
+   git-synced assets are directly linkable, which resolves "need a hosted
+   link" notes in the source doc.
 
-4. **Update `SUMMARY.md`** in that space to match the new file list/order.
+4. **Map content into per-lab files** in the relevant space folder, following
+   the naming pattern already in use: `lab-N-slug.md`, `appendix-X-slug.md`.
+   Number files to match what the doc itself calls each lab. If the new draft
+   reorders labs relative to the current files, or renames a lab, flag it to
+   the user rather than silently reshaping the file layout.
 
-5. **Commit and push to `main`.**
+5. **Apply the styling conventions below.** Don't invent new ones without a
+   reason.
+
+6. **Update `SUMMARY.md`** in that space to match the new file list/order.
+
+7. **Ask before resolving ambiguity you can't infer from context** — highlighted
+   / marked draft text, sentences that reference something not yet decided
+   ("need a link" placeholders), or screenshots that contradict the prose
+   (e.g. a worked-example screenshot using a different story number than the
+   one the text recommends). Don't silently guess on anything that changes
+   what an attendee reads or does.
+
+8. **Commit and push to `main`.**
    ```bash
    git add <space>/
    git commit -m "..."
@@ -49,19 +88,30 @@ custom CSS available from the repo side. Space-level appearance (theme color,
 logo, custom domain) is configured in the GitBook web UI, not here.
 
 - **Callout boxes** → GitBook hint blocks:
-  - `{% hint style="info" %}` — tips, "good to know" notes, optional/aside info
-  - `{% hint style="warning" %}` — things that can trip you up (scope questions,
-    prerequisite/dependency checks, fallback triggers)
-  - `{% hint style="success" %}` — "Feature Spotlight" / teaching-moment callouts
-- **Prompts** meant to be copy-pasted verbatim into Build Agent → fenced
-  ` ```text ` code blocks, each under its own `### Prompt N` heading.
+  - `{% hint style="info" %}` — "TIP —" boxes, "good to know" notes,
+    optional/aside info, unprefixed short teaching asides
+  - `{% hint style="warning" %}` — "IMPORTANT —" boxes: things that can trip
+    you up, prerequisite/dependency checks, fallback triggers
+  - `{% hint style="success" %}` — "Feature Spotlight" / teaching-moment
+    callouts
+- **Prompts AND CLI commands** meant to be copy-pasted verbatim → fenced
+  ` ```text ` (prompts) or ` ```bash ` (shell commands) code blocks, each
+  under its own heading (`### Prompt N`, or a numbered step). GitBook renders
+  a one-click copy button on every fenced code block automatically — no extra
+  markup needed, just use real code fences instead of plain text or a table
+  cell.
 - **Placeholders** like `<YOUR FIRST NAME>` or `[PLUGIN NAME — confirm]` → wrap
   in inline code (`` `<YOUR FIRST NAME>` ``) so GitBook's markdown parser
-  doesn't treat angle brackets as HTML and silently drop them.
-- **Screenshot placeholders** (no image yet) → `> 🖼️ *Screenshot: description*`
-  blockquote.
-- **ASCII flow diagrams** (box-and-arrow figures in the docx) → fenced plain
-  code blocks, preserved as monospace art.
+  doesn't treat angle brackets as HTML and silently drop them. Exception:
+  inside a fenced code block, leave them as literal `<...>` (no escaping
+  needed there since it's not parsed as markdown/HTML).
+- **Screenshots** → real embedded images once available (see workflow step 3),
+  `![descriptive alt text](assets/filename.png)`. Only fall back to a
+  `> 🖼️ *Screenshot: description*` placeholder blockquote when no image has
+  been provided yet for that spot.
+- **ASCII flow diagrams** in early drafts often get replaced by a real
+  designed diagram image in later drafts — check before assuming a code-block
+  diagram is still the source of truth.
 - Plain tables → convert straight to GFM tables.
 
 ## Local machine setup (already done, note for a future fresh session)
@@ -82,13 +132,23 @@ build-agent/
   README.md
   SUMMARY.md
   lab-0-setup.md
-  lab-1-scaffold.md
+  lab-1-foundational-app.md
   lab-2-catalog-item.md
   lab-3-load-backlog.md
-  lab-4-ship-a-story.md
+  lab-4-implement-a-story.md
   lab-5-document-the-app.md
   appendix-a-paste-fallback.md
-build-anywhere/       # added later — same pattern, separate GitBook space
+  build-agent-vs-build-anywhere.md   # duplicated in both spaces, see above
+  assets/*.png
+build-anywhere/       # same pattern, separate GitBook space
+  README.md
+  SUMMARY.md
+  lab-6-connect.md
+  lab-7-ship-from-cli.md
+  lab-8-ai-skill.md
+  build-agent-vs-build-anywhere.md
+  assets/*.png
 scripts/
-  docx-to-raw.sh      # pandoc wrapper, mechanical first step of a conversion
+  docx-to-raw.sh      # pandoc wrapper incl. --extract-media, mechanical first
+                       # step of a conversion
 ```
