@@ -11,6 +11,7 @@
   * [Summary](build-agent/SUMMARY.md)
   * [Appendix A · Copy-Paste Backlog (Lab 3 Fallback)](build-agent/appendix-a-paste-fallback.md)
 * [Part Two - Build Anywhere](build-anywhere/README.md)
+  * [The Pre-Lunch Lab](build-anywhere/pre-lunch-lab.md)
   * [Lab 6 · Connect to Groundwork from the Command Line](build-anywhere/lab-6-connect.md)
   * [Lab 7 · Ship Another Story from the Command Line](build-anywhere/lab-7-ship-from-cli.md)
   * [Lab 8 · Add an AI Skill: Request Triage](build-anywhere/lab-8-ai-skill.md)

@@ -20,6 +20,6 @@ The platform, scope, and update sets are identical to the morning. Only the tool
 **Before you start: your Codespace is ready.** The GitHub Codespace from your invite is pre-provisioned: the ServiceNow SDK and packages are installed, and a Claude API key is already wired to your account. The one thing you set up by hand is the connection to your own lab instance. If your Codespace is not open yet, open it from the repository now; it takes a minute to spin up.
 {% endhint %}
 
-Ready? Start with [Lab 6: Connect to Groundwork from the Command Line](lab-6-connect.md).
+Ready? Start with [The Pre-Lunch Lab](pre-lunch-lab.md).
 
 Looking for how this compares to the morning? See [Build Agent or Build Anywhere?](build-agent-vs-build-anywhere.md)
