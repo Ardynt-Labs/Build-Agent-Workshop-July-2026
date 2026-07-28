@@ -1,7 +1,6 @@
 # Table of contents
 
-* [Build Agent Workshop — GitBook repo](README.md)
-* [Part One - Build Agent on ServiceNow](build-agent/README.md)
+* [Part One - Build Agent on ServiceNow](README.md)
   * [Lab 0 · Setup and a Parallel Start](build-agent/lab-0-setup.md)
   * [Lab 1 · Creating the Foundational App](build-agent/lab-1-foundational-app.md)
   * [Lab 2 · The Front Door: A Catalog Item](build-agent/lab-2-catalog-item.md)
@@ -17,3 +16,4 @@
   * [Lab 8 · Add an AI Skill: Request Triage](build-anywhere/lab-8-ai-skill.md)
   * [Wrap Up · Build Agent or Build Anywhere?](build-anywhere/build-agent-vs-build-anywhere.md)
   * [Summary](build-anywhere/SUMMARY.md)
+* [Build Agent Workshop — GitBook repo](<README (1).md>)

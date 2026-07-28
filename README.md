@@ -1,118 +1,73 @@
----
-hidden: true
----
+# Part One - Build Agent on ServiceNow
 
-# Build Agent Workshop — GitBook repo
+### Ship Your Backlog with Enterprise Vibe Coding
 
-This repo hosts GitBook spaces via git sync. Each space is one top-level folder (`build-agent/`, `build-anywhere/`), each with its own `.gitbook.yaml` pointing at a `README.md` + `SUMMARY.md` inside that folder. In the GitBook web UI, each space's **Project directory** setting is pointed at its folder — that's how one repo serves multiple spaces without cross-contamination. Content that discusses both spaces (e.g. the closing comparison page) is duplicated as a standalone page in both spaces' folders rather than shared/symlinked — GitBook spaces are independent content trees, so there's no cross-space include mechanism.
+This morning you will do a couple of activities like what you or your team do at work: scaffold an app, put a front door on it, pull in a backlog, implement a story from it, and document what you built. An AI agent does the heavy lifting while you supervise.
 
-As of the v2 ("Ardynt Formatted") docx, a single source file can contain BOTH the morning (Build Agent) and afternoon (Build Anywhere) content in one document — don't assume one docx maps to one space. Read the whole thing and split by content, not by file.
+By noon you will have a working application called Groundwork that you scaffolded, exposed through **Employee Center** or Service Portal, extended from real user stories, and documented, all through conversation with Build Agent.
 
-## Workflow: converting a new docx draft
+In the afternoon ([Build Anywhere](build-anywhere/)) you do it again from the outside: connect to that same app from a GitHub Codespace, implement another story, and add an AI skill, driving Claude Code and the ServiceNow SDK from the command line. Same platform, same governance, a different cockpit.
 
-The user will hand over an updated `.docx` lab guide periodically. Each time:
+## What we will accomplish this morning
 
-1.  **Convert to raw markdown, extracting embedded images:**
+By the time you leave you will have done a full slice of platform work with an agent as your pair.
 
-    ```bash
-    ./scripts/docx-to-raw.sh /path/to/the.docx
-    ```
+| Lab                    | What you build                                                          | The skill underneath                                                                        |
+| ---------------------- | ----------------------------------------------------------------------- | ------------------------------------------------------------------------------------------- |
+| 1 · Foundational app   | A working app: table, fields, sample data, navigation                   | Turning one prompt into a running app                                                       |
+| 2 · Catalog front door | An Employee Center or Service Portal catalog item that creates requests | The quality of the provided requirements directly impacts the quality of the generated code |
+| 3 · Load backlog       | Eight user stories loaded into the platform backlog                     | Getting real-world input into the platform                                                  |
+| 4 · Implement a story  | One backlog story taken to done against its acceptance criteria         | Reviewing an agent's plan and holding the line                                              |
+| 5 · Document           | A README and architecture diagram generated from the app                | Documentation as the zero-risk agent task                                                   |
 
-    This drops pandoc's output at `/tmp/docx-raw/raw.md` plus an extracted `media/media/imageN.png` for every embedded image, in the same position they appear in the doc (as inline `<img>` tags) — so you can match each image to its surrounding paragraph without guessing. Read the whole markdown file before touching any space's files — lab numbering, order, titles, and even which labs exist can shift between drafts, and don't assume the previous file layout is still right. (v0.5→v2: Lab 1 "Scaffold Groundwork" became "Creating the Foundational App"; Lab 4 "Ship a Story" became "Implement a Story" — filenames were renamed to match.)
-2. **View every non-obvious embedded image** (the Read tool renders PNG/GIF directly) before writing alt text or picking a filename. For screenshots whose content is already fully described by the adjacent paragraph (e.g. a terminal strip right after "type `bash` and press Enter"), inferring alt text from context without opening the file is fine — but for anything ambiguous (diagrams, multi-purpose screenshots, tiny icons), view it first. Tiny decorative glyphs (e.g. a 32×32 inline mascot icon) don't embed well blown up to page width — drop them and keep the sentence as plain text rather than force an image in.
-3.  **Copy images into a per-space `assets/` folder** with descriptive filenames (`lab1-plan-approval.png`, not `image8.png`) — this is what makes the repo maintainable across drafts. Reference them with the `<figure>` pattern below (NOT plain `![]()`) — plain markdown images render small and cramped inside hint blocks:
+You will finish with an app that is foundational, fronted by a catalog item, extended by a story you implemented, and documented, plus a feel for where the human stays in the loop.
 
-    ```html
-    <figure><img src="assets/filename.png" alt="descriptive alt text"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
-    ```
+## How this lab works
 
-    If the alt text itself contains a `"` (quoting UI text, e.g. a button label), escape it as `&quot;` — a literal `"` inside the `alt="..."` attribute breaks the tag. Don't try to preserve the docx's inch sizing; this pattern renders full-width and responsive.
+Every prompt you send follows the same loop:
 
-    **Never nest a `<figure>` inside a `{% hint %}` block.** GitBook's hint renderer doesn't handle it — the image comes out tiny and the caption doesn't show at all. If a hint's source text has a screenshot in the middle of it, split it: hint text only inside `{% hint %}...{% endhint %}`, then the `<figure>` right after the hint closes, as regular content.
+1. **Prompt.** Describe what you want in plain language.
+2. **Plan.** Build Agent shows you what it intends to create before touching anything. You are the human in the loop.
+3. **Approve.** Read the plan, then approve it. Approving does not count as a new prompt.
+4. **Verify.** Open what it built. Click around. Check it against what you asked for.
+5. **Iterate.** Not quite right? Describe the change. Instead of starting over, always iterate.
 
-    For a file attendees need to download and use elsewhere (e.g. Lab 3's stories spreadsheet): embed it with the figure pattern, then add a `{% hint style="info" %}` telling them to **right-click the image and choose Save Image As / Download Image**. Don't add a separate markdown link to the asset path — GitBook may resolve it as an external GitHub link (shows a confusing `↗` and can land non-technical users on a raw GitHub blob page), which is exactly the "folks might not know how to download from GitHub" problem to avoid.
-4. **Map content into per-lab files** in the relevant space folder, following the naming pattern already in use: `lab-N-slug.md`, `appendix-X-slug.md`. Number files to match what the doc itself calls each lab. If the new draft reorders labs relative to the current files, or renames a lab, flag it to the user rather than silently reshaping the file layout.
-5. **Apply the styling conventions below.** Don't invent new ones without a reason.
-6. **Update `SUMMARY.md`** in that space to match the new file list/order. Don't list the README as its own bullet (e.g. `* [Space Title](README.md)`) — `.gitbook.yaml`'s `structure.readme` already makes it the space's landing page, and an extra self-referencing bullet appears to be what produces a stray, generically-labeled "Summary" entry in GitBook's rendered nav. Order labs first in sequence, with any closing/wrap-up and appendix pages last (ask the user for their preferred order among those rather than guessing).
-7. **Ask before resolving ambiguity you can't infer from context** — highlighted / marked draft text, sentences that reference something not yet decided ("need a link" placeholders), or screenshots that contradict the prose (e.g. a worked-example screenshot using a different story number than the one the text recommends). Don't silently guess on anything that changes what an attendee reads or does.
-8.  **Commit and push to `main`.**
+Agent builds generally take three to six minutes. The more complex the prompt and the plan created, the longer the build.
 
-    ```bash
-    git add <space>/
-    git commit -m "..."
-    git push origin main
-    ```
+{% hint style="info" %}
+**TIP — Good to know.** Build Agent currently requires the admin role. Your lab instance gives you admin, which is why everything works today. Back home, plan for who gets access. One well-scoped prompt beats four small ones. Draft longer prompts in a text editor first, then paste.
+{% endhint %}
 
-    `gh` is authenticated on this machine (`gh auth status` to confirm) and `gh auth setup-git` has already wired git's credential helper — push should just work without re-authenticating.
+## Working with Build Agent chats
 
-## Styling conventions (established in the first conversion, keep consistent)
+A **Build Agent** conversation is a working session, not a permanent record. Your changes are saved to the platform (and to update sets) as you approve them; the chat is just the thread that produced them. Treat chats as disposable. If you need to create a summary of changes implemented in a chat session, ask Build Agent to document them itself.
 
-GitBook git-sync renders a specific block syntax from markdown; there is no custom CSS available from the repo side. Space-level appearance (theme color, logo, custom domain) is configured in the GitBook web UI, not here.
+Start a fresh chat when:
 
-* **Callout boxes** → GitBook hint blocks:
-  * `{% hint style="info" %}` — "TIP —" boxes, "good to know" notes, optional/aside info, unprefixed short teaching asides
-  * `{% hint style="warning" %}` — "IMPORTANT —" boxes: things that can trip you up, prerequisite/dependency checks, fallback triggers
-  * `{% hint style="success" %}` — "Feature Spotlight" / teaching-moment callouts
-*   **Prompts AND CLI commands** meant to be copy-pasted verbatim → wrap a fenced ` ```text ` (prompts) or ` ```bash ` (shell commands) code block in GitBook's `<div data-gb-custom-block data-tag="code" data-overflow='wrap'>` / `</div>` block, each under its own heading (`### Prompt N`, or a numbered step):
+* **You switch to an unrelated task.** One conversation per logical unit of work keeps the change log grouped cleanly and checkpoints easy to reason about. For this workshop, we will likely use just one chat, unless we run out of context for our current window.
+* **The agent starts looping, contradicting itself, or dragging.** Long threads accumulate context; a clean chat often fixes a confused agent faster than arguing with it.
+* **You reloaded the window and your attachment disappeared.** Uploads live only in the current conversation and do not survive a reload.
+* **You get a "terminated" error.** We are using lab instances, with fewer allocated resources than any of your customer instances, and more similar to a Personal Developer Instance. If this error appears, simply prompt **Build Agent** to "try again" and it should pick up from where it left off. If you get this error repeatedly, start another chat and point it at your existing application.
 
-    ````
-    {% code overflow="wrap" %}
-    ```text
-    the prompt text, can be one long line or several
-    ````
+<figure><img src=".gitbook/assets/terminated-error-try-again.png" alt="Build Agent chat showing a &#x22;terminated&#x22; error, with &#x22;try again&#x22; typed in reply and the agent resuming work"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
-    \{% endcode %\}
+{% hint style="info" %}
+**Tip: attach and prompt together.** Whenever a task needs a file, attach it and send your instruction in the same message. If you attach, then reload, then prompt, the agent will not see the file. Confirm the attachment chip appears before you send.
+{% endhint %}
 
-    ```
-    `overflow="wrap"` is required — a plain triple-backtick fence with no
-    wrapper renders long single-line prompts truncated with a horizontal
-    scrollbar the reader has to notice and use, easy to miss entirely. GitBook
-    renders a one-click copy button on these automatically either way.
-    ```
-* **Placeholders** like `<YOUR FIRST NAME>` or `[PLUGIN NAME — confirm]` → wrap in inline code (`` `<YOUR FIRST NAME>` ``) so GitBook's markdown parser doesn't treat angle brackets as HTML and silently drop them. Exception: inside a fenced code block, leave them as literal `<...>` (no escaping needed there since it's not parsed as markdown/HTML).
-* **Screenshots** → real embedded images once available, using the `<figure>` pattern in workflow step 3 (not plain `![]()`). Only fall back to a `> 🖼️ *Screenshot: description*` placeholder blockquote when no image has been provided yet for that spot.
-* **Space titles** → `# Part One - <name>` / `# Part Two - <name>` (a plain hyphen, not `·`) as the README H1, once a space is one of several parts in a multi-part workshop. Check with the user before assuming this pattern extends to a third part etc.
-* **ASCII flow diagrams** in early drafts often get replaced by a real designed diagram image in later drafts — check before assuming a code-block diagram is still the source of truth.
-* Plain tables → convert straight to GFM tables.
+## Before you begin
 
-## Things that live in GitBook's app, not this repo
+* Reserve your instance using the link and code on screen. Log in with the credentials provided through the instance reservation page. Keep this page open, we will need it later.
+* Navigate to **All > App Engine > ServiceNow Studio**. You might have to wait for 20-30 seconds for the **All** menu to load when the instance has just been claimed.
 
-Some nav/display elements the user sees are GitBook UI/platform settings, not derived from anything in this repo — don't go looking for a markdown fix:
+<figure><img src=".gitbook/assets/all-menu-search-studio.png" alt="All menu search showing &#x22;ServiceNow Studio&#x22; under App Engine"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
-* A banner/badge above the spaces list (e.g. showing the repo name) is most likely the GitBook **Collection** title that groups the spaces together — renamed or hidden in GitBook's Collection settings.
-* Per-space appearance (theme color, logo, custom domain) — Space settings in the GitBook web UI. If the user reports one of these looking wrong, say so plainly and point them at GitBook's settings rather than guessing at a repo-side fix.
+* The Build Agent chat panel opens by default in new Studio sessions. If it is not open, select Open Build Agent from the status bar in the lower right corner, or the sparkle icon in the banner (upper right).
 
-## Local machine setup (already done, note for a future fresh session)
+<figure><img src=".gitbook/assets/studio-with-build-agent-panel.png" alt="ServiceNow Studio with the Build Agent (Now Assist) panel open on the right"><figcaption><p>Click on image to zoom in</p></figcaption></figure>
 
-* Homebrew, `gh`, and `pandoc` are installed.
-* `gh` is authenticated as `andreeagrecu-ardynt`; `gh auth setup-git` has wired git's credential helper so `git push`/`git pull` over HTTPS just work.
-* This directory (`~/Claude/Projects/ServiceNow/Build-Agent-Workshop-July-2026`) is a persistent clone — `git pull` before editing, `git push` when done. Don't redo the conversion from scratch in a scratchpad/tmp dir; work here so history accumulates normally.
+{% hint style="warning" %}
+**IMPORTANT — Raise** your hand at any point. Floor support is here for exactly this.
+{% endhint %}
 
-## Repo layout
-
-```
-build-agent/
-  .gitbook.yaml       # root: ./, points to README.md + SUMMARY.md
-  README.md
-  SUMMARY.md
-  lab-0-setup.md
-  lab-1-foundational-app.md
-  lab-2-catalog-item.md
-  lab-3-load-backlog.md
-  lab-4-implement-a-story.md
-  lab-5-document-the-app.md
-  appendix-a-paste-fallback.md
-  build-agent-vs-build-anywhere.md   # duplicated in both spaces, see above
-  assets/*.png
-build-anywhere/       # same pattern, separate GitBook space
-  README.md
-  SUMMARY.md
-  lab-6-connect.md
-  lab-7-ship-from-cli.md
-  lab-8-ai-skill.md
-  build-agent-vs-build-anywhere.md
-  assets/*.png
-scripts/
-  docx-to-raw.sh      # pandoc wrapper incl. --extract-media, mechanical first
-                       # step of a conversion
-```
+Ready? Start with [Lab 0: Setup and a Parallel Start](build-agent/lab-0-setup.md).
