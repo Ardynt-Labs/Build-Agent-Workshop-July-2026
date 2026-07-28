@@ -16,4 +16,3 @@
   * [Lab 8 · Add an AI Skill: Request Triage](build-anywhere/lab-8-ai-skill.md)
   * [Wrap Up · Build Agent or Build Anywhere?](build-anywhere/build-agent-vs-build-anywhere.md)
   * [Summary](build-anywhere/SUMMARY.md)
-* [Build Agent Workshop — GitBook repo](<README (1).md>)
